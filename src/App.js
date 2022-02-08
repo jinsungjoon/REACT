@@ -14,7 +14,6 @@ function App() {
     </div>
   );
 }
-
 var funcStyle = 'color:blue';
 var funcId = 0;
 function FuncComp(props){
