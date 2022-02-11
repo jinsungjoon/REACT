@@ -3,12 +3,21 @@ import React ,{useState,useEffect} from 'react';
 import './App.css';
 
 function App() {
+  var [funcShow, setFuncShow] = useState(false);
+  var [classShow, setClassShow] = useState(false);
   return (
     <div className="App">
       <div className='container'>
        <h1>Hello World!!</h1>
-       <FuncComp ininNumber={2}></FuncComp>
-       <ClassComp ininNumber={2}></ClassComp>
+       <input type="button" value="func"  onClick={
+        function(){
+          console.log(funcShow);
+          setFuncShow(true);
+          console.log(funcShow);
+       }}></input>
+       <input type="button" value="class"></input>
+       {funcShow ? <FuncComp ininNumber={2}></FuncComp> : null }
+       {classShow ? <ClassComp ininNumber={2}></ClassComp> : null }
       </div>
      
     </div>
@@ -26,10 +35,32 @@ function FuncComp(props){
   // var setDate = dateState[1];
 
   var [date,setDate] = useState(new Date().toString());
+  
+
   useEffect(function(){
-    console.log('%cfunc = > useEffect (componentDidMount & componentDidUpdate) '+(++funcId),funcStyle);
-    document.title = number+ ' : ' + date;
-  });
+    console.log('%cfunc = > useEffect  (componentDidMount & componentDidUpdate) '+(++funcId),funcStyle);
+    document.title =  date;
+    return function(){
+      console.log('%cfunc = > useEffect  return (componentDidMount & componentDidUpdate) '+(++funcId),funcStyle);
+    }
+  },[]);
+
+  //side effect
+  useEffect(function(){
+    console.log('%cfunc = > useEffect date (componentDidMount & componentDidUpdate) '+(++funcId),funcStyle);
+    document.title =  date;
+    return function(){
+      console.log('%cfunc = > useEffect date return (componentDidMount & componentDidUpdate) '+(++funcId),funcStyle);
+    }
+  },[date]);
+
+  useEffect(function(){
+    console.log('%cfunc = > useEffect number (componentDidMount & componentDidUpdate) '+(++funcId),funcStyle);
+    document.title =  number;
+    return function(){
+      console.log('%cfunc = > useEffect number return (componentDidMount & componentDidUpdate) '+(++funcId),funcStyle);
+    }
+  },[number]);
   console.log('%cfunc = > render '+(++funcId),funcStyle);
   return (
     <div className='container'>
